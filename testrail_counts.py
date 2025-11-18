@@ -246,14 +246,17 @@ class TestRailClient:
             # Handle different response formats
             page_count = 0
             
-            # Cloud format: has 'size' key
-            if 'size' in data:
+            # Cloud format: returns dict with 'size', '_links', and data array
+            # Example: {"offset": 0, "limit": 250, "size": 6, "_links": {...}, "milestones": [...]}
+            if isinstance(data, dict) and 'size' in data:
                 page_count = data.get('size', 0)
-            # On-prem format: direct array
+            # On-prem format: returns direct array (no wrapping object)
+            # Example: [{...}, {...}, {...}]
             elif isinstance(data, list):
                 page_count = len(data)
-            # On-prem format: wrapped in endpoint-specific key
-            else:
+            # On-prem format: wrapped in endpoint-specific key (fallback)
+            # Example: {"milestones": [...]} (without size/_links)
+            elif isinstance(data, dict):
                 # Try endpoint-specific key first (e.g., 'get_milestones/123' -> 'milestones')
                 # Extract endpoint name (before any project_id or parameters)
                 endpoint_parts = endpoint.split('/')
@@ -280,13 +283,17 @@ class TestRailClient:
             
             total += page_count
             
-            # Check for next page
-            next_link = data.get('_links', {}).get('next')
-            if next_link:
-                # Extract endpoint from next link
-                current_url = next_link.split('api/v2/')[-1] if 'api/v2/' in next_link else next_link
-                current_params = {}  # Params are in the next URL
+            # Check for next page (only if data is a dict, not a list)
+            if isinstance(data, dict):
+                next_link = data.get('_links', {}).get('next')
+                if next_link:
+                    # Extract endpoint from next link
+                    current_url = next_link.split('api/v2/')[-1] if 'api/v2/' in next_link else next_link
+                    current_params = {}  # Params are in the next URL
+                else:
+                    break
             else:
+                # If data is a list (on-prem format), there's no pagination
                 break
         
         return total
