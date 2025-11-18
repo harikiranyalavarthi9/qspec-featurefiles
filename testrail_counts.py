@@ -10,6 +10,8 @@ Usage:
     3. Run: python testrail_counts.py
 """
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import requests
 from requests.auth import HTTPBasicAuth
 import json
@@ -137,7 +139,7 @@ class TestRailClient:
         try:
             logger.debug(f"GET {endpoint} with params: {params}")
             logger.debug(f"Full URL: {url}")
-            response = self.session.get(url, auth=self.auth, params=params, timeout=30)
+            response = self.session.get(url, auth=self.auth, params=params, timeout=30, verify=False)
             
             # Handle authentication errors (HTTP 401)
             if response.status_code == 401:
