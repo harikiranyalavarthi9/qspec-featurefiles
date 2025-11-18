@@ -102,6 +102,7 @@ class TestRailClient:
         self.base_url = base_url.rstrip('/')
         self.auth = HTTPBasicAuth(username, api_key)
         self.session = requests.Session()
+        self.session.verify = False  # Disable SSL verification for self-signed certificates
         self._lock = threading.Lock()  # Thread-safe logging
         self.rate_limit_hits = 0  # Track rate limit occurrences
         self.total_requests = 0   # Track total API requests
@@ -135,7 +136,22 @@ class TestRailClient:
         
         try:
             logger.debug(f"GET {endpoint} with params: {params}")
+            logger.debug(f"Full URL: {url}")
             response = self.session.get(url, auth=self.auth, params=params, timeout=30)
+            
+            # Handle authentication errors (HTTP 401)
+            if response.status_code == 401:
+                error_msg = "Authentication failed (401 Unauthorized)"
+                try:
+                    error_body = response.text
+                    if error_body:
+                        error_msg += f": {error_body}"
+                except:
+                    pass
+                logger.error(f"{error_msg}")
+                logger.error(f"Please verify your USERNAME and API_KEY are correct.")
+                logger.error(f"URL used: {url}")
+                return {}
             
             # Handle rate limiting (HTTP 429)
             if response.status_code == 429:
@@ -213,7 +229,10 @@ class TestRailClient:
         return self._get(f'get_project/{project_id}')
     
     def count_paginated(self, endpoint: str, params: Optional[Dict] = None) -> int:
-        """Count items across all pages using _links.next"""
+        """Count items across all pages using _links.next
+        
+        Handles both cloud (with 'size' key) and on-prem (direct array) formats
+        """
         total = 0
         current_url = endpoint
         current_params = params or {}
@@ -224,8 +243,42 @@ class TestRailClient:
             if not data:
                 break
             
-            # Add size from current page
-            total += data.get('size', 0)
+            # Handle different response formats
+            page_count = 0
+            
+            # Cloud format: has 'size' key
+            if 'size' in data:
+                page_count = data.get('size', 0)
+            # On-prem format: direct array
+            elif isinstance(data, list):
+                page_count = len(data)
+            # On-prem format: wrapped in endpoint-specific key
+            else:
+                # Try endpoint-specific key first (e.g., 'get_milestones/123' -> 'milestones')
+                # Extract endpoint name (before any project_id or parameters)
+                endpoint_parts = endpoint.split('/')
+                endpoint_name = endpoint_parts[0] if endpoint_parts else endpoint
+                # Remove 'get_' prefix if present (e.g., 'get_milestones' -> 'milestones')
+                if endpoint_name.startswith('get_'):
+                    key_name = endpoint_name[4:]  # Remove 'get_' prefix
+                    if key_name in data and isinstance(data[key_name], list):
+                        page_count = len(data[key_name])
+                
+                # If not found, try common keys
+                if page_count == 0:
+                    for key in ['milestones', 'plans', 'runs', 'cases', 'suites']:
+                        if key in data and isinstance(data[key], list):
+                            page_count = len(data[key])
+                            break
+                
+                # Last resort: find any array in response (excluding metadata)
+                if page_count == 0:
+                    for key in data.keys():
+                        if key != '_links' and isinstance(data.get(key), list):
+                            page_count = len(data[key])
+                            break
+            
+            total += page_count
             
             # Check for next page
             next_link = data.get('_links', {}).get('next')
