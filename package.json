@@ -1,0 +1,17 @@
+{
+  "name": "qtest-automation-cucumber",
+  "version": "1.0.0",
+  "description": "Cucumber BDD tests for qTest Scenario + Pulse + GitLab CI integration",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:headless": "HEADLESS=true cucumber-js",
+    "test:report": "cucumber-js --format json:reports/cucumber-report.json",
+    "validate": "node scripts/validate-workflow.js"
+  },
+  "keywords": ["cucumber", "bdd", "qtest", "automation"],
+  "license": "MIT",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.0.0",
+    "axios": "^1.7.0"
+  }
+}
