@@ -36,4 +36,6 @@ Feature: User Authentication
     And my session has expired
     When I attempt to access a protected resource
     Then I should be redirected to the login page
-    And I should see a message "Your session has expired"
+    And I should see a message "Your session has expired"!
+
+    
