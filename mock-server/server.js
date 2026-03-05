@@ -123,17 +123,18 @@ const server = http.createServer(async (req, res) => {
         return send(res, 200, { message: 'Logged out' });
     }
 
-    // Token refresh
+    // Token refresh — BUG: returns 500 intermittently to simulate flaky server
     if (url === '/api/auth/refresh' && method === 'POST') {
         const token = getAuthToken(req);
         if (!token || !activeSessions.has(token)) {
             return send(res, 401, { message: 'Invalid or expired token' });
         }
 
+        // BUG: server returns wrong status code (500 instead of 200)
         activeSessions.delete(token);
         const newToken = makeToken('refreshed');
         activeSessions.add(newToken);
-        return send(res, 200, { token: newToken });
+        return send(res, 500, { token: newToken, error: 'Internal server error' });
     }
 
     // Protected: Dashboard
