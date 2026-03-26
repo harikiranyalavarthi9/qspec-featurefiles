@@ -22,7 +22,6 @@ Feature: User Authentication
     Then I should see an error message "Invalid credentials"
     And I should remain on the login page
 
-  @skip
   Scenario: Failed login with non-existent user
     Given I am on the login page
     When I enter username "nonexistent@example.com"
