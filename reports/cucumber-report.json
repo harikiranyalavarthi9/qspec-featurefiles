@@ -1,0 +1,1044 @@
+[
+  {
+    "description": "  As a system user\n  I want to authenticate via API\n  So that I can access protected resources",
+    "elements": [
+      {
+        "description": "",
+        "id": "api-authentication-and-token-management;user-logs-in-with-valid-credentials",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "User logs in with valid credentials",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 254227
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 291222
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the API is accessible",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 36330770
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I set the base URL to the API gateway",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 138091
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "I have valid user credentials",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:124"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 95753
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "I send a login request with email \"user@example.com\" and password \"SecurePass123\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:128"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4728657
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:135"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 178452
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "the response should contain an auth token",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 387325
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "the token should be valid JWT format",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:144"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 200736
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 338343
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "api-authentication-and-token-management;user-login-fails-with-invalid-password",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "User login fails with invalid password",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 105144
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 185741
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the API is accessible",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2009262
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I set the base URL to the API gateway",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 90646
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "I have user credentials with email \"user@example.com\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:148"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 150170
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I send a login request with invalid password \"WrongPassword\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:152"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2320752
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "the response status should be 401",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:135"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 77296
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the response should contain error message \"Invalid credentials\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:159"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 998493
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "no auth token should be returned",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:164"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 96406
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 284175
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "api-authentication-and-token-management;token-refresh-works-correctly",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Token refresh works correctly",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 44192
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 475646
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the API is accessible",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8218753
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I set the base URL to the API gateway",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 72400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 25,
+            "name": "I have a valid auth token",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:168"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2549755
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "I send a refresh token request",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:176"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6530835
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "the response status should be 200",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:135"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 1432745,
+              "error_message": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n500 !== 200\n\n    + expected - actual\n\n    -500\n    +200\n\n    at World.<anonymous> (/Users/harikiranyalavarthi/Downloads/qspec-featurefiles/step-definitions/authentication-api.steps.js:136:12)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "a new auth token should be returned",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:183"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "the new token should be different from the old one",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:188"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 237918
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "api-authentication-and-token-management;expired-token-is-rejected",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "Expired token is rejected",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 354586
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 260972
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the API is accessible",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3419337
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I set the base URL to the API gateway",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79165
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 32,
+            "name": "I have an expired auth token",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 165043
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "I use the expired token to access a protected resource",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:196"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19480743
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 34,
+            "name": "the response status should be 401",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:135"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 73106
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "the response should contain error message \"Token expired\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:159"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 71574
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 102078
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "api-authentication-and-token-management",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "API Authentication and Token Management",
+    "tags": [],
+    "uri": "features/APIAuthFeature.feature"
+  },
+  {
+    "description": "  As a registered user\n  I want to manage my account details\n  So that I can keep my information accurate and up to date",
+    "elements": [
+      {
+        "description": "",
+        "id": "account-profile-management;user-edits-and-updates-account-details-successfully",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "User edits and updates account details successfully",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 30976
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 85150
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am a registered user",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I am logged into the application",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "the account profile section is visible",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "I hover over the account profile section",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "I click the \"Edit Details\" option",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "an account details form should be displayed",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "the form should contain fields for name, email, and password",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 16,
+            "name": "I update my name to \"John Doe\"",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I update my email to \"john.doe@example.com\"",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "I click the \"Save\" button",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "my account details should be updated successfully",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "I should see a confirmation message \"Account details updated successfully\"",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 121642
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "account-profile-management",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Account Profile Management",
+    "tags": [],
+    "uri": "features/Account_Profile_Management.feature"
+  },
+  {
+    "description": "  As a user\n  I want to authenticate with valid credentials\n  So that I can access the application",
+    "elements": [
+      {
+        "description": "",
+        "id": "user-authentication;successful-login-with-valid-credentials",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "Successful login with valid credentials",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 121204
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 165833
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the authentication service is available",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2921992
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 10,
+            "name": "I am on the login page",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1947470
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I enter username \"testuser@example.com\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 178413
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "I enter password \"SecurePassword123\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:43"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 133108
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I click the login button",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:48"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6199841
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "I should be authenticated successfully",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:60"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 126571
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I should be redirected to the dashboard",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 72546
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 194442
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "user-authentication;failed-login-with-invalid-password",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Failed login with invalid password",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 50298
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 4365097
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the authentication service is available",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3836975
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "I am on the login page",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2617920
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I enter username \"testuser@example.com\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 89398
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "I enter password \"WrongPassword\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:43"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78280
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I click the login button",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:48"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1940201
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "I should see an error message \"Invalid credentials\"",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:73"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 625990
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "I should remain on the login page",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:80"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 328600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 326376
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "user-authentication;session-timeout-handling",
+        "keyword": "Scenario",
+        "line": 34,
+        "name": "Session timeout handling",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 54644
+            }
+          },
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 112101
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the authentication service is available",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1921366
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 35,
+            "name": "I am authenticated and logged in",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:87"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5558659
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "my session has expired",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2844368
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 37,
+            "name": "I attempt to access a protected resource",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2380642
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "I should be redirected to the login page",
+            "match": {
+              "location": "step-definitions/authentication-api.steps.js:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 131334
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "I should see a message \"Your session has expired\"!",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 179472
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "user-authentication",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "User Authentication",
+    "tags": [],
+    "uri": "features/UserAuthentication.feature"
+  }
+]

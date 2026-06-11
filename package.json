@@ -1,5 +1,5 @@
 {
-  "name": "qtest-automation-cucumber",
+  "name": "qspec-featurefiles",
   "version": "1.0.0",
   "description": "Cucumber BDD tests for qTest Scenario + Pulse + GitLab CI integration",
   "scripts": {
